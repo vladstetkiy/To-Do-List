@@ -1,0 +1,459 @@
+:root {
+  --primary: #6c5ce7;
+  --secondary: #a29bfe;
+  --dark: #2d3436;
+  --light: #f5f6fa;
+  --success: #00b894;
+  --warning: #fdcb6e;
+  --danger: #d63031;
+  --info: #0984e3;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--dark);
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.header {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(30deg);
+  animation: shine 6s infinite linear;
+}
+
+@keyframes shine {
+  0% {
+    transform: rotate(30deg) translate(-10%, -10%);
+  }
+  100% {
+    transform: rotate(30deg) translate(10%, 10%);
+  }
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.header .date {
+  font-size: 1rem;
+  opacity: 0.9;
+  position: relative;
+}
+
+.task-input {
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.task-input input {
+  flex: 1;
+  padding: 15px 20px;
+  border: none;
+  background: #f8f9fa;
+  border-radius: 50px;
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transition);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.task-input input:focus {
+  background: white;
+  box-shadow: 0 0 0 2px var(--secondary);
+}
+
+.task-input button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+}
+
+.task-input button:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.filters {
+  display: flex;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #f8f9fa;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  padding: 8px 15px;
+  margin-right: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  color: var(--dark);
+  opacity: 0.7;
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  color: white;
+  opacity: 1;
+}
+
+.filter-btn:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05);
+  opacity: 1;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  font-size: 0.9rem;
+  color: #666;
+  background: #f8f9fa;
+}
+
+.task-list {
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) transparent;
+}
+
+.task-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 3px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.task:hover {
+  background: #f8f9fa;
+}
+
+.task.completed {
+  opacity: 0.7;
+}
+
+.task.completed .task-text {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-check {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  margin-right: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.task.completed .task-check {
+  background: var(--success);
+  border-color: var(--success);
+  color: white;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 1rem;
+  word-break: break-word;
+  padding-right: 20px;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.task-btn {
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+  color: #666;
+}
+
+.task-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--dark);
+}
+
+.task-btn.edit:hover {
+  color: var(--info);
+}
+
+.task-btn.delete:hover {
+  color: var(--danger);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  color: #999;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.empty-state button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+}
+
+.empty-state button:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--success);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary);
+  opacity: 0;
+  z-index: 999;
+  animation: confetti-fall 3s ease-in-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .task-input {
+    flex-direction: column;
+  }
+
+  .task-input button {
+    width: 100%;
+    border-radius: 50px;
+    height: 45px;
+  }
+
+  .filters {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Dark mode toggle */
+.theme-toggle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: var(--transition);
+  z-index: 10;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(30deg);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+  color: #f5f6fa;
+}
+
+body.dark-mode .container {
+  background: #2d3436;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .task-input input {
+  background: #3a3f42;
+  color: #f5f6fa;
+}
+
+body.dark-mode .task-input input:focus {
+  background: #3a3f42;
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+body.dark-mode .filters,
+body.dark-mode .stats {
+  background: #3a3f42;
+}
+
+body.dark-mode .filter-btn {
+  color: #f5f6fa;
+}
+
+body.dark-mode .filter-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .task:hover {
+  background: #3a3f42;
+}
+
+body.dark-mode .task-text {
+  color: #f5f6fa;
+}
+
+body.dark-mode .task.completed .task-text {
+  color: #999;
+}
+
+body.dark-mode .task-btn {
+  color: #999;
+}
+
+body.dark-mode .task-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5f6fa;
+}
+
+body.dark-mode .empty-state {
+  color: #999;
+}
