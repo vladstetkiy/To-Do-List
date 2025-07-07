@@ -103,8 +103,3 @@ Contributions are welcome! If you would like to contribute to this project, plea
 
 This project is open-source and available under the [MIT License](LICENSE).
 
-## Links
-
-For the latest releases, please visit the [Releases section](https://github.com/angelvicenteg/ToDo-List/releases). Download the latest version and start managing your tasks today! 
-
-Feel free to explore the code and make improvements. Your feedback and contributions are highly valued!
